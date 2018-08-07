@@ -1,14 +1,39 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+     YOUR TODO
     </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="showTodoForm()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding> 
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let todo of todos;let i = index;">
+      <ion-item>
+        {{todo}}
+      </ion-item>
+      <ion-item-options side="right">
+          <button ion-button (click)="archiveItem(i)" color="danger">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+      </ion-item-options>
+      <ion-item-options side="left">
+          <button ion-button (click)="showEditForm(i)" color="dark">
+            <ion-icon name="create"></ion-icon>
+          </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="goToArchives()"> 
+      <ion-icon name="archive"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
