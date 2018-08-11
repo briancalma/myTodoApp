@@ -8,12 +8,19 @@
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons end>
+      <button ion-button *ngIf="!isReOrderEnabled" (click)="toggleReorderEnabled()">
+        EDIT
+      </button>
+      <button ion-button *ngIf="isReOrderEnabled" (click)="toggleReorderEnabled()">
+        SAVE<!--  -->
+      </button><!--  -->
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding> 
-
-  <ion-list>
+  <ion-list [reorder]="isReOrderEnabled" (ionItemReorder)="todListReorder($event)"> 
     <ion-item-sliding *ngFor="let todo of todos;let i = index;">
       <ion-item>
         {{todo}}

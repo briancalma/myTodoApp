@@ -8,17 +8,19 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ArchivesPage } from '../pages/archives/archives';
 import { TodoProvider } from '../providers/todo/todo';
+import { ArchivesPageModule } from '../pages/archives/archives.module';
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ArchivesPage
+    //ArchivesPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ArchivesPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

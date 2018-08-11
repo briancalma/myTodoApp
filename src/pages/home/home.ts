@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, reorderArray } from 'ionic-angular';
 import { ArchivesPage } from '../archives/archives';
 import { TodoProvider } from '../../providers/todo/todo';
+
 
 
 @Component({
@@ -11,6 +12,8 @@ import { TodoProvider } from '../../providers/todo/todo';
 export class HomePage {
 
   public todos = [];
+
+  public isReOrderEnabled = false;
 
   constructor(public navCtrl: NavController, private _todoProvider: TodoProvider, public alertCtrl: AlertController) {
     this.getAllTodos();
@@ -71,7 +74,7 @@ export class HomePage {
         {text: 'Cancel'},
         {
           text: 'Save', 
-          handler: data => { this.updateTask(data.taskInput); }
+          handler: data => { this.updateTask(data.taskInput,index); }
         }
       ]
     });
@@ -79,7 +82,16 @@ export class HomePage {
     editForm.present();
   }
 
-  updateTask(item) {
-    console.log(item);
+  updateTask(item,index) {
+    // console.log(item + " " + index);
+    this._todoProvider.editTodo(index, item);
+  }
+
+  todListReorder($event) {
+    reorderArray(this.todos,$event);
+  }
+
+  toggleReorderEnabled() {
+    this.isReOrderEnabled = !this.isReOrderEnabled;
   }
 }
